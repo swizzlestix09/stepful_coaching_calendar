@@ -30,7 +30,6 @@ async function seed() {
     await client.sql`
     INSERT INTO ${tables[0].table} (name, email, phone_number)
     VALUES(${tables[0].data[0].name}, ${tables[0].data[0].email}, ${tables[0].data[0].phone_number})
-    ON CONFLICT (id) DO NOTHING;
     `;
 
     console.log("Table created successfully");
