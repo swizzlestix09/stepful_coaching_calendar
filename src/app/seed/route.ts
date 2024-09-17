@@ -19,7 +19,7 @@ const tables = [
   },
 ];
 
-export async function seed() {
+async function seed() {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
     await client.sql`
