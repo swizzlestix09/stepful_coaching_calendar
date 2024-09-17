@@ -2,39 +2,47 @@ import { db } from "@vercel/postgres";
 
 const client = await db.connect();
 
-const tables = [
+const data = [
   {
-    table: "coach",
-    variables: `coach_id SERIAL PRIMARY KEY,
-                name VARCHAR(100) UNIQUE,
-                email VARCHAR(100) UNIQUE,
-                phone_number VARCHAR(15)`,
-    data: [
-      {
-        name: `Bob Bobberson`,
-        email: `bob@bobby.com`,
-        phone_number: "2122221212",
-      },
-    ],
+    name: `Annie Annieblum`,
+    email: `annie@annie.com`,
+    phone_number: "2127183479",
   },
 ];
 
 async function seed() {
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
+  await client.sql`ALTER TABLE coaches DROP CONSTRAINT coaches_user_id_fkey;`;
+  await client.sql`ALTER TABLE students DROP CONSTRAINT students_user_id_fkey;`;
+
+  await client.sql`DROP TABLE IF EXISTS users;`;
+
+  await client.sql`DROP TABLE IF EXISTS coaches;`;
+  await client.sql`DROP TABLE IF EXISTS students;`;
+
   await client.sql`
-  CREATE TABLE IF NOT EXISTS coach (
-    coach_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) UNIQUE,
+  CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE,
-    phone_number VARCHAR(15)
+    password VARCHAR(12) NOT NULL
   );
   `;
 
   await client.sql`
-    INSERT INTO coach (name, email, phone_number)
-    VALUES('Bob Bobberson', 'bob@bobby.com', '2122221212')
-    `;
+  CREATE TABLE coaches (
+    user_id INT REFERENCES users(id),
+    PRIMARY KEY (user_id)
+  );
+`;
+
+  await client.sql`
+  CREATE TABLE students (
+    user_id INT REFERENCES users(id),
+    PRIMARY KEY (user_id)
+);
+`;
 }
 
 export async function GET() {
