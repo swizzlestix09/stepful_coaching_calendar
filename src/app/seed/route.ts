@@ -4,15 +4,15 @@ const client = await db.connect();
 
 const tables = [
   {
-    table: "COACH",
+    table: "coach",
     variables: `coach_id SERIAL PRIMARY KEY,
                 name VARCHAR(100) UNIQUE,
                 email VARCHAR(100) UNIQUE,
                 phone_number VARCHAR(15)`,
     data: [
       {
-        name: "Bob Bobberson",
-        email: "bob@bobby.com",
+        name: `Bob Bobberson`,
+        email: `bob@bobby.com`,
         phone_number: "2122221212",
       },
     ],
@@ -20,22 +20,21 @@ const tables = [
 ];
 
 async function seed() {
-  try {
-    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
-    await client.sql`
-    CREATE TABLE IF NOT EXISTS ${tables[0].table} (
-      ${tables[0].variables}
-    );
-    `;
-    await client.sql`
-    INSERT INTO ${tables[0].table} (name, email, phone_number)
-    VALUES(${tables[0].data[0].name}, ${tables[0].data[0].email}, ${tables[0].data[0].phone_number})
-    `;
+  await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
-    console.log("Table created successfully");
-  } catch (error) {
-    console.error("Error during table creation:", error);
-  }
+  await client.sql`
+  CREATE TABLE IF NOT EXISTS coach (
+    coach_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE,
+    email VARCHAR(100) UNIQUE,
+    phone_number VARCHAR(15)
+  );
+  `;
+
+  await client.sql`
+    INSERT INTO coach (name, email, phone_number)
+    VALUES('Bob Bobberson', 'bob@bobby.com', '2122221212')
+    `;
 }
 
 export async function GET() {
