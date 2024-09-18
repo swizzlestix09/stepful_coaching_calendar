@@ -6,13 +6,15 @@ import { useState } from "react"
 
 type UserInfo = {
   email: string,
-  password: string
+  password: string,
+  type: ''
 }
 
 export default function Page() {
   const [userInfo, setUserInfo] = useState<UserInfo>({
     email: '',
-    password: ''
+    password: '',
+    type: ''
   })
   const router = useRouter();
 
