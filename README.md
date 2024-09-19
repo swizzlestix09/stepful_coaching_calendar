@@ -29,7 +29,7 @@ These are the log in credentials:
   John Doe	john.doe@example.com	password123
   Annie Ann	annie.ann@example.com	password123
 
-  If for some reason these credentials are not working, uncomment 
+  If for some reason these credentials are not working, uncomment lines 16 - 22 in src/app/seed/route and run localhost:XXXX/seed to populate database
 
 ## Learn More
 
