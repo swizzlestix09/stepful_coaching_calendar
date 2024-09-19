@@ -10,7 +10,7 @@ import { createBeginningAndEndTimesForSlot } from "@/app/utils/utils"
 const DayAndTimeSelector = () => {
   const { dateAndTime } = useDateTime()
   const formattedDate = dateAndTime.date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
-  console.log('Time: ', dateAndTime.time)
+
   const handleDayandTimeSaveClick = () => {
     createBeginningAndEndTimesForSlot(dateAndTime)
     //get slot end time

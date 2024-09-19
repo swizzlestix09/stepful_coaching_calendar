@@ -6,7 +6,6 @@ import { useDateTime } from "../contexts/DateAndTimeContext"
 export default function UserCalendar() {
 
   const { dateAndTime, setDateAndTime } = useDateTime()
-  console.log('Date: ', dateAndTime.date)
 
   const handleSelectDate = (date: Date | undefined) => {
     if (date) {

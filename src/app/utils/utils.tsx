@@ -8,6 +8,8 @@ export const createBeginningAndEndTimesForSlot = ({ date, time }: DateAndTimeTyp
   //break with :
   // first val h second val m
   //take date
+  date.setHours(Number(h))
+  date.setMinutes(Number(m))
   const endTime = new Date(date)
   endTime.setHours(endTime.getHours() + 2)
   // date.SetHours(h)
@@ -15,7 +17,7 @@ export const createBeginningAndEndTimesForSlot = ({ date, time }: DateAndTimeTyp
   //create var for endTime
   // take date
   // .getHours() + 2
-  console.log(time)
+  console.log(date, endTime)
 
   //return both
   return {
