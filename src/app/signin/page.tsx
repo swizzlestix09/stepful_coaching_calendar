@@ -45,7 +45,7 @@ export default function Page() {
       }
 
     } catch (error) {
-      console.error('Error during login: ')
+      console.error('Error during login: ', error)
     }
     console.log('done')
   }

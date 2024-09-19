@@ -1,6 +1,6 @@
 import { createContext, useState, ReactNode, useContext } from 'react';
 
-type DateAndTimeType = {
+export type DateAndTimeType = {
   date: Date;
   time: string;
 }
