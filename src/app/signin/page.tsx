@@ -3,11 +3,12 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { FormEvent } from "react"
 
 type UserInfo = {
   email: string,
   password: string,
-  type: ''
+  type?: ''
 }
 
 export default function Page() {
@@ -20,22 +21,38 @@ export default function Page() {
 
   const handleUserInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(name, value)
     setUserInfo(prevInfo => ({ ...prevInfo, [name]: value }))
-
   }
 
-  const handleUserInfoSubmit = () => {
-    //send info to database
-    //if error update UI
-    //if no errors progress to next page
-  }
+  const handleUserInfoSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    console.log('form submitted')
+    try {
+      const res = await fetch('/api/auth/signin', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: userInfo.email,
+          password: userInfo.password
+        })
+      })
+      const redirectUrl = res
+      console.log(redirectUrl)
+      if (redirectUrl) {
+        router.push(res.url)
+      }
 
-  const handleSignUpClick = () => router.push('/signup')
+    } catch (error) {
+      console.error('Error during login: ')
+    }
+    console.log('done')
+  }
 
   return (
 
-    <div className="w-1/3 mx-auto justify-center items-center" onSubmit={(e) => e.preventDefault()}>
+    <div className="w-1/3 mx-auto justify-center items-center" onSubmit={handleUserInfoSubmit}>
       <form className="flex-col align-center">
         <p>Sign-in</p>
         <Input
@@ -51,7 +68,6 @@ export default function Page() {
           value={userInfo.password}
           onChange={handleUserInfoChange} />
         <Button type="submit">Sign-In</Button>
-        <Button type="button" onClick={handleSignUpClick}>Sign-Up</Button>
       </form>
     </div>
 
@@ -77,7 +93,9 @@ export default function Page() {
  *   once  time + day is selected enable save
  *     is booked in slots needs to be updated
  *      booking needs slot id and student id updated
+ *      telephone number of student needs to be referenced to by student_id in booking
+ *      telephone number of coach needs to be referenced to by slot_id and then coach_id
  *
  *
  * - 2 hour time slot
- *
+ */
