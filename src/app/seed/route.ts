@@ -26,6 +26,7 @@ async function seed() {
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE,
+    telephone VARCHAR(20) NOT NULL,
     password VARCHAR(12) NOT NULL
   );
   `;
@@ -36,13 +37,27 @@ async function seed() {
     PRIMARY KEY (user_id)
   );
 `;
-
   await client.sql`
-  CREATE TABLE students (
-    user_id INT REFERENCES users(id),
-    PRIMARY KEY (user_id)
+CREATE TABLE students (
+  user_id INT REFERENCES users(id),
+  PRIMARY KEY (user_id)
 );
 `;
+  await client.sql`
+    INSERT INTO users (name, email, telephone, password)
+   VALUES (${"John Doe"}, ${"john.doe@example.com"}, ${"2122222898"}, ${"password123"}),
+     (${"Annie Ann"}, ${"annie.ann@example.com"}, ${"6461113232"}, ${"password123"}),
+    (${"Will Willam"}, ${"will.willam@example.com"}, ${"9098767777"}, ${"password123"}),
+    (${"Simp Simperton"}, ${"simp.simperton@example.com"}, ${"098234172634"}, ${"password123"});
+  `;
+
+  await client.sql`
+    INSERT INTO coaches (user_id) VALUES (${1}), (${2});
+  `;
+
+  await client.sql`
+    INSERT INTO students (user_id) VALUES (${3}), (${4});
+  `;
 }
 
 export async function GET() {
