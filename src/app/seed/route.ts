@@ -37,12 +37,26 @@ async function seed() {
     PRIMARY KEY (user_id)
   );
 `;
+
   await client.sql`
 CREATE TABLE students (
   user_id INT REFERENCES users(id),
   PRIMARY KEY (user_id)
 );
 `;
+
+  await client.sql`
+CREATE TABLE slots (
+  id SERIAL PRIMARY KEY,
+  coach_id INT REFERENCES users(id) ON DELETE CASCADE,
+  start_time TIMESTAMP NOT NULL,
+  end_time TIMESTAMP NOT NULL,
+  is_booked BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+`;
+
   await client.sql`
     INSERT INTO users (name, email, telephone, password)
    VALUES (${"John Doe"}, ${"john.doe@example.com"}, ${"2122222898"}, ${"password123"}),

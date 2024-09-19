@@ -1,7 +1,7 @@
 "use client"
 
 import UserCalendar from "@/app/components/calendar/Calendar";
-import { DateProvider } from "@/app/components/calendar/DateContext";
+import { DateProvider } from "@/app/components/contexts/DateAndTimeContext";
 
 const StudentPage = () => {
 

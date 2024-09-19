@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useDateTime } from '../contexts/DateAndTimeContext';
+
 
 const TimePicker: React.FC = () => {
-  const [time, setTime] = useState<string>('');
-
+  const { dateAndTime, setDateAndTime } = useDateTime();
+  console.log('Time: ', dateAndTime)
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTime(e.target.value);
+    setDateAndTime(prev => ({ ...prev, time: e.target.value }));
   };
 
   return (
@@ -13,10 +15,9 @@ const TimePicker: React.FC = () => {
       <input
         id="time-picker"
         type="time"
-        value={time}
+        value={dateAndTime.time}
         onChange={handleTimeChange}
       />
-      <p>Selected Time: {time}</p>
     </div>
   );
 };
