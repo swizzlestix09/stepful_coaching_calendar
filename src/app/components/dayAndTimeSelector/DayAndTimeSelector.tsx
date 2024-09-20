@@ -12,7 +12,7 @@ const DayAndTimeSelector = () => {
   const formattedDate = dateAndTime.date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
 
   const handleDayandTimeSaveClick = () => {
-    createBeginningAndEndTimesForSlot(dateAndTime)
+    const { beginTime, endTime } = createBeginningAndEndTimesForSlot(dateAndTime)
     //get slot end time
     //create POST handler for slot save
     //
