@@ -16,10 +16,9 @@ async function seed() {
   await client.sql`ALTER TABLE coaches DROP CONSTRAINT coaches_user_id_fkey;`;
   await client.sql`ALTER TABLE students DROP CONSTRAINT students_user_id_fkey;`;
 
-  await client.sql`DROP TABLE IF EXISTS users;`;
-
-  await client.sql`DROP TABLE IF EXISTS coaches;`;
-  await client.sql`DROP TABLE IF EXISTS students;`;
+  await client.sql`DROP TABLE IF EXISTS coaches CASCADE;`;
+  await client.sql`DROP TABLE IF EXISTS students CASCADE;`;
+  await client.sql`DROP TABLE IF EXISTS users CASCADE;`;
 
   await client.sql`
   CREATE TABLE IF NOT EXISTS users (
@@ -54,7 +53,6 @@ CREATE TABLE slots (
   is_booked BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT NOW()
 );
-
 `;
 
   await client.sql`
