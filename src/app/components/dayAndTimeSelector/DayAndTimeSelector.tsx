@@ -17,11 +17,13 @@ const DayAndTimeSelector = () => {
     //create POST handler for slot save
     //
   }
+
+
   return (
     <>
       <UserCalendar />
       <TimePicker />
-      {dateAndTime.time.length > 0 && <span>{`You have selected ${formattedDate} at ${dateAndTime.time.toLocaleTimeString()} . Click the button to save the slot.`}</span>}
+      {dateAndTime.time.length > 0 && <span>{`You have selected ${formattedDate} at ${dateAndTime.time} . Click the button to save the slot.`}</span>}
       <Button onClick={handleDayandTimeSaveClick}>Save Slot</Button>
     </>
   )
