@@ -12,6 +12,7 @@ type UserInfo = {
 }
 
 export default function Page() {
+  const [errorMessage, setErrorMessage] = useState('');
   const [userInfo, setUserInfo] = useState<UserInfo>({
     email: '',
     password: '',
@@ -38,22 +39,29 @@ export default function Page() {
           password: userInfo.password
         })
       })
-      const redirectUrl = res
-      console.log(redirectUrl)
-      if (redirectUrl) {
-        router.push(res.url)
+      console.log('response: ', res)
+      if (res.ok) {
+        const redirectUrl = res
+        console.log(redirectUrl)
+        if (redirectUrl) {
+          router.push(res.url)
+        }
+        setErrorMessage('')
+      } else {
+        setErrorMessage('Invalid credentials. Please try again.')
       }
 
     } catch (error) {
       console.error('Error during login: ', error)
+      setErrorMessage('Invalid credentials. Please try again.')
     }
     console.log('done')
   }
 
   return (
 
-    <div className="w-1/3 mx-auto justify-center items-center" onSubmit={handleUserInfoSubmit}>
-      <form className="flex-col align-center">
+    <div className="w-1/3 mx-auto justify-center items-center">
+      <form className="flex-col align-center" onSubmit={handleUserInfoSubmit}>
         <p>Sign-in</p>
         <Input
           name='email'
@@ -68,6 +76,9 @@ export default function Page() {
           value={userInfo.password}
           onChange={handleUserInfoChange} />
         <Button type="submit">Sign-In</Button>
+        {errorMessage.length > 0 && (
+          <p style={{ color: 'red' }}>{errorMessage}</p>
+        )}
       </form>
     </div>
 

@@ -9,13 +9,14 @@ export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const body = await req.json();
     const { email, password } = body;
+    //console.log("in try: ", email, password);
     const client = await db.connect();
 
     const userResult: QueryResult<QueryResultRow> = await client.sql`
     SELECT * FROM users WHERE email = ${email} AND password = ${password};
     `;
-
-    if (!userResult) {
+    console.log();
+    if (userResult.rowCount === 0) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
@@ -24,7 +25,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const isPasswordValid = password === user.password;
 
     if (!isPasswordValid) {
-      return NextResponse.json({ error: "Invalid credentials" });
+      return NextResponse.json(
+        { error: "Invalid credentials." },
+        { status: 401 }
+      );
     }
 
     const coachResult: QueryResult<QueryResultRow> = await client.sql`
@@ -37,15 +41,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const isCoach = Boolean(coachResult.rowCount);
     const isStudent = Boolean(studentResult.rowCount);
 
-    if (password === user.password) {
-      if (isCoach) {
-        return NextResponse.redirect(`http://localhost:3000/coach/${user.id}`);
-      }
-      if (isStudent) {
-        return NextResponse.redirect(
-          `http://localhost:3000/student/${user.id}`
-        );
-      }
+    if (isCoach) {
+      return NextResponse.redirect(`http://localhost:3000/coach/${user.id}`);
+    }
+    if (isStudent) {
+      return NextResponse.redirect(`http://localhost:3000/student/${user.id}`);
     }
 
     return NextResponse.json(
@@ -58,6 +58,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
     );
   } catch (error) {
     console.error("Error in sign-in route:", error);
-    return NextResponse.json({ error: "Internal server error" });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }

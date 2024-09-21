@@ -26,12 +26,12 @@ const DayAndTimeSelector = () => {
   }, [dateAndTime.time])
 
   return (
-    <>
+    <div className="mx-auto">
       <UserCalendar />
       <TimePicker />
       {dateAndTime.time.length > 0 && <span>{`You have selected ${formattedDate} at ${twelveHourTime}. Click the button to save the slot.`}</span>}
       <Button onClick={handleDayandTimeSaveClick}>Save Slot</Button>
-    </>
+    </div>
   )
 }
 
