@@ -27,7 +27,7 @@ export default function Page() {
 
   const handleUserInfoSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log('form submitted')
+
     try {
       const res = await fetch('/api/auth/signin', {
         method: 'POST',

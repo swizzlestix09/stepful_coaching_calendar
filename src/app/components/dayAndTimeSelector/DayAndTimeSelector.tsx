@@ -1,5 +1,3 @@
-import { Calendar } from "@/components/ui/calendar"
-
 import { useDateTime } from "../contexts/DateAndTimeContext"
 import UserCalendar from "../calendar/Calendar"
 import TimePicker from "../timeSelector/TimeSelector"
@@ -7,14 +5,19 @@ import { Button } from "@/components/ui/button"
 import { convert24hrTimeto12hrTime, createBeginningAndEndTimesForSlot } from "@/app/utils/utils"
 import { memo, useMemo } from "react"
 
+type Props = {
+  userId: number
+}
+const DayAndTimeSelector = ({ userId }: Props) => {
 
-const DayAndTimeSelector = () => {
   const { dateAndTime } = useDateTime();
   const formattedDate = dateAndTime.date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
 
   const handleDayandTimeSaveClick = () => {
     const { beginTime, endTime } = createBeginningAndEndTimesForSlot(dateAndTime);
+
     //get slot end time
+    //get coach id
     //create POST handler for slot save
     //
   }
