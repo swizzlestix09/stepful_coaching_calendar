@@ -4,7 +4,7 @@ import { useDateTime } from '../contexts/DateAndTimeContext';
 
 const TimePicker: React.FC = () => {
   const { dateAndTime, setDateAndTime } = useDateTime();
-  console.log('Time: ', dateAndTime)
+  //console.log('Time: ', dateAndTime)
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDateAndTime(prev => ({ ...prev, time: e.target.value }));
   };

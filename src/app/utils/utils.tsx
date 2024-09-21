@@ -13,7 +13,7 @@ export const createBeginningAndEndTimesForSlot = ({ date, time }: DateAndTimeTyp
   // console.log(date, endTime)
 
   return {
-    beginTime: date,
+    startTime: date,
     endTime
   }
 }
@@ -28,7 +28,8 @@ export const convert24hrTimeto12hrTime = (time: string) => {
   if (h === 0) {
     h = 12;
   }
-  return `${h}:${m} ${meridiem}`
+  const min = m === 0 ? '00' : m
+  return `${h}:${min} ${meridiem}`
 }
 
 //postgres will save as UTC apparently.

@@ -2,20 +2,13 @@ import { db } from "@vercel/postgres";
 
 const client = await db.connect();
 
-const data = [
-  {
-    name: `Annie Annieblum`,
-    email: `annie@annie.com`,
-    phone_number: "2127183479",
-  },
-];
-
 async function seed() {
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
   await client.sql`ALTER TABLE coaches DROP CONSTRAINT coaches_user_id_fkey;`;
   await client.sql`ALTER TABLE students DROP CONSTRAINT students_user_id_fkey;`;
 
+  await client.sql`DROP TABLE IF EXISTS slots CASCADE;`;
   await client.sql`DROP TABLE IF EXISTS coaches CASCADE;`;
   await client.sql`DROP TABLE IF EXISTS students CASCADE;`;
   await client.sql`DROP TABLE IF EXISTS users CASCADE;`;
@@ -51,7 +44,8 @@ CREATE TABLE slots (
   start_time TIMESTAMP NOT NULL,
   end_time TIMESTAMP NOT NULL,
   is_booked BOOLEAN DEFAULT FALSE,
-  created_at TIMESTAMP DEFAULT NOW()
+  created_at TIMESTAMP DEFAULT NOW(),
+  CONSTRAINT unique_slot UNIQUE (coach_id, start_time, end_time)
 );
 `;
 

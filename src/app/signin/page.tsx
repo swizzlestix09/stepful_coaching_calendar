@@ -39,7 +39,7 @@ export default function Page() {
           password: userInfo.password
         })
       })
-      console.log('response: ', res)
+
       if (res.ok) {
         const redirectUrl = res
         console.log(redirectUrl)
