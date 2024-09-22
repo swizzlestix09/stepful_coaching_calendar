@@ -10,7 +10,6 @@ const StudentPage = () => {
   const pathname = usePathname().split('/')
   const { userType, userId } = getUserTypeAndUserId(pathname)
 
-
   return (
     <div>
       <h1>Student Page</h1>

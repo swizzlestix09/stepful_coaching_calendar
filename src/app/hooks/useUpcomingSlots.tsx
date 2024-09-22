@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 export const useUpcomingSlots = (timezone: string, userId: number, url: string) => {
   const [slots, setSlots] = useState([])
-  console.log('in hook', timezone)
+
   useEffect(() => {
     const fetchSlots = async () => {
       try {
