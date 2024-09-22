@@ -3,7 +3,7 @@ import UserCalendar from "../calendar/Calendar"
 import TimePicker from "../timeSelector/TimeSelector"
 import { Button } from "@/components/ui/button"
 import { convert24hrTimeto12hrTime, createBeginningAndEndTimesForSlot } from "@/app/utils/utils"
-import { memo, useMemo, useState } from "react"
+import { memo, useEffect, useMemo, useState } from "react"
 
 type Props = {
   userId: number
@@ -43,19 +43,28 @@ const DayAndTimeSelector = ({ userId }: Props) => {
 
   }
 
+  useEffect(() => {
+    if (successOrErrorMessage) {
+      const timer = setTimeout(() => {
+        setSuccessOrErrorMessage('');
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [successOrErrorMessage]);
+
+
   const twelveHourTime = useMemo(() => {
     const { time } = dateAndTime;
     return convert24hrTimeto12hrTime(time)
   }, [dateAndTime.time])
 
   return (
-    <div className="w-1/3 flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <UserCalendar />
       <TimePicker />
       {dateAndTime.time.length > 0 && <p className="pt-1 text-center">{`You have selected ${formattedDate} at ${twelveHourTime}. Click the button to save the slot.`}</p>}
-      <div className="pt-1">
-        <Button onClick={handleDayandTimeSaveClick}>Save Slot</Button>
-      </div>
+      <Button onClick={handleDayandTimeSaveClick}>Save Slot</Button>
       {successOrErrorMessage.length > 0 ? <p className="pt-1 text-center">{successOrErrorMessage}</p> : null}
     </div>
   )

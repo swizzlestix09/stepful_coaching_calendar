@@ -17,7 +17,7 @@ type Props = {
 const SlotDisplay = ({ userId }: Props) => {
 
   const listResult = useUpcomingSlots(userId, '/api/coach/[id]')
-  console.log('RESULT: ', listResult)
+
 
   return (
     <Tabs defaultValue="upcoming" >

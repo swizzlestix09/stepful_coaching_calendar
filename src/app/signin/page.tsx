@@ -42,7 +42,7 @@ export default function Page() {
 
       if (res.ok) {
         const redirectUrl = res
-        console.log(redirectUrl)
+
         if (redirectUrl) {
           router.push(res.url)
         }
@@ -55,7 +55,6 @@ export default function Page() {
       console.error('Error during login: ', error)
       setErrorMessage('Invalid credentials. Please try again.')
     }
-    console.log('done')
   }
 
   return (
