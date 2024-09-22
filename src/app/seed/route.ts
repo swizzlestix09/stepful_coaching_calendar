@@ -46,8 +46,18 @@ CREATE TABLE slots (
   is_booked BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT NOW(),
   CONSTRAINT unique_slot UNIQUE (coach_id, start_time, end_time)
-);
-`;
+  );
+  `;
+
+  await client.sql`
+CREATE TABLE bookings (
+  id SERIAL PRIMARY KEY,
+  slot_id INT REFERENCES slots(id) ON DELETE CASCADE,
+  student_id INT REFERENCES users(id),
+  booking_time TIMESTAMP DEFAULT NOW(),
+  UNIQUE (slot_id)
+  );
+  `;
 
   await client.sql`
     INSERT INTO users (name, email, telephone, password)

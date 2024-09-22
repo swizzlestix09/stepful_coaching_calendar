@@ -10,7 +10,7 @@ const TimePicker: React.FC = () => {
   };
 
   return (
-    <div className="p-8 justify-center align-center w-max mx-auto ">
+    <div className="p-4 justify-center align-center w-max mx-auto ">
       <label className="p-1" htmlFor="time-picker" > Select Time:</label >
       <input
         id="time-picker"
