@@ -6,11 +6,12 @@ import { usePathname } from "next/navigation"
 import SlotDisplay from "@/app/components/slotDisplay/SlotDisplay";
 import NotesAndRatings from "@/app/components/NotesAndRatings/NotesAndRatings";
 import { getUserTypeAndUserId } from "@/app/utils/utils";
+import { useUserContext } from "@/app/components/contexts/UserContext";
 
 
 const CoachPage = () => {
-  const pathname = usePathname().split('/')
-  const { userType, userId } = getUserTypeAndUserId(pathname)
+  const { userType, userId, timezone } = useUserContext();
+
 
   return (
     <div>
@@ -18,11 +19,11 @@ const CoachPage = () => {
       <div className=" p-8 mx-auto flex flex-row">
         <div className="w-1/3 p-8 mx-auto ">
           <DateTimeProvider>
-            <DayAndTimeSelector userId={userId} />
+            <DayAndTimeSelector />
           </DateTimeProvider>
         </div>
         <div className="w-2/3 p-8">
-          <SlotDisplay userType={userType} userId={userId} />
+ />
         </div>
       </div>
       <NotesAndRatings />

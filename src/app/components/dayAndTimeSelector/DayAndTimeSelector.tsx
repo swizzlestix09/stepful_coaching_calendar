@@ -4,11 +4,10 @@ import TimePicker from "../timeSelector/TimeSelector"
 import { Button } from "@/components/ui/button"
 import { convert24hrTimeto12hrTime, createBeginningAndEndTimesForSlot } from "@/app/utils/utils"
 import { memo, useEffect, useMemo, useState } from "react"
+import { useUserContext } from "../contexts/UserContext"
 
-type Props = {
-  userId: number
-}
-const DayAndTimeSelector = ({ userId }: Props) => {
+const DayAndTimeSelector = () => {
+  const { userType, userId } = useUserContext();
   const [successOrErrorMessage, setSuccessOrErrorMessage] = useState<string>('')
   const { dateAndTime } = useDateTime();
   const formattedDate = dateAndTime.date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });

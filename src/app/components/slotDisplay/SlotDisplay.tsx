@@ -10,16 +10,15 @@ import {
 import { memo } from "react"
 import AppointmentsTable from "../AppointmentsTable"
 import { getTimeZone } from "@/app/utils/utils"
+import { useUserContext } from "../contexts/UserContext"
 
-type Props = {
-  userType: string,
-  userId: number
-}
 
-const SlotDisplay = ({ userType, userId }: Props) => {
-  const timeZone = getTimeZone()
-  console.log('in slotDisplay', userType, timeZone)
-  const listResult = useUpcomingSlots(timeZone, userId, `/api/${userType}/[id]`)
+
+const SlotDisplay = () => {
+  const { userType, userId, timezone } = useUserContext();
+  if (!userId) return null;
+
+  const listResult = useUpcomingSlots(timezone, userId, `/api/${userType}/[id]`)
 
 
   return (
