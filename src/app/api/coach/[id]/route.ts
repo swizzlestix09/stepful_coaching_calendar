@@ -44,6 +44,7 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest, res: NextResponse) {
   const { searchParams } = new URL(req.url);
   const userId = searchParams.get("userId");
+  const timezone = searchParams.get("timezone");
 
   if (!userId) {
     return NextResponse.json({ error: "user ID is required" }, { status: 400 });
@@ -54,8 +55,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
     SELECT
     id,
     coach_id,
-    start_time AT TIME ZONE 'UTC' AT TIME ZONE 'America/New_York' AS start_time,
-    end_time AT TIME ZONE 'UTC' AT TIME ZONE 'America/New_York' AS end_time,
+    start_time AT TIME ZONE 'UTC' AT TIME ZONE ${timezone} AS start_time,
+    end_time AT TIME ZONE 'UTC' AT TIME ZONE ${timezone} AS end_time,
     is_booked,
     created_at
   FROM slots

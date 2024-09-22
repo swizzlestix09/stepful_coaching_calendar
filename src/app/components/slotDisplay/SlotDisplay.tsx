@@ -18,7 +18,7 @@ type Props = {
 
 const SlotDisplay = ({ userType, userId }: Props) => {
   const timeZone = getTimeZone()
-
+  console.log('in slotDisplay', userType, timeZone)
   const listResult = useUpcomingSlots(timeZone, userId, `/api/${userType}/[id]`)
 
 
