@@ -33,7 +33,7 @@ const Rating = ({ ratingTitle = "Select a rating" }: Props) => {
       <SelectContent>
         <SelectGroup>
           {ratings.map((ratingValue) => (
-            <SelectItem value={ratingValue.value}>{ratingValue.label}</SelectItem>
+            <SelectItem key={ratingValue.value} value={ratingValue.value}>{ratingValue.label}</SelectItem>
 
           ))}
         </SelectGroup>

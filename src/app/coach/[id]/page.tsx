@@ -5,12 +5,12 @@ import { DateTimeProvider } from "@/app/components/contexts/DateAndTimeContext";
 import { usePathname } from "next/navigation"
 import SlotDisplay from "@/app/components/slotDisplay/SlotDisplay";
 import NotesAndRatings from "@/app/components/NotesAndRatings/NotesAndRatings";
+import { getUserTypeAndUserId } from "@/app/utils/utils";
 
 
 const CoachPage = () => {
   const pathname = usePathname().split('/')
-  const userId = Number(pathname[pathname.length - 1])
-
+  const { userType, userId } = getUserTypeAndUserId(pathname)
 
   return (
     <div>
@@ -22,7 +22,7 @@ const CoachPage = () => {
           </DateTimeProvider>
         </div>
         <div className="w-2/3 p-8">
-          <SlotDisplay userId={userId} />
+          <SlotDisplay userType={userType} userId={userId} />
         </div>
       </div>
       <NotesAndRatings />

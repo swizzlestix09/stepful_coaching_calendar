@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 
-export const useUpcomingSlots = (userId: number, url: string) => {
+export const useUpcomingSlots = (timeZone: string, userId: number, url: string) => {
   const [slots, setSlots] = useState([])
 
   useEffect(() => {
     const fetchSlots = async () => {
       try {
-        const res = await fetch(`${url}?userId=${userId}`)
+        const res = await fetch(`${url}?userId=${userId}&timezone=${timeZone}`)
         const data = await res.json()
         console.log(data)
         setSlots(data)

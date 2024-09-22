@@ -32,3 +32,14 @@ export const convert24hrTimeto12hrTime = (time: string) => {
   const min = m === 0 ? '00' : m
   return `${h}:${min} ${meridiem}`
 }
+
+
+export const getUserTypeAndUserId = (pathname: string[]) => {
+  const [, userType, userId] = pathname;
+
+  return {
+    userType, userId: parseInt(userId)
+  }
+}
+
+export const getTimeZone = () => (Intl.DateTimeFormat().resolvedOptions().timeZone)

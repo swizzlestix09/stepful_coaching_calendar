@@ -59,7 +59,7 @@ export default function Page() {
 
   return (
 
-    <div className="w-1/3 mx-auto justify-center items-center">
+    <div className="w-1/4 mx-auto justify-center items-center p-8">
       <form className="flex-col align-center" onSubmit={handleUserInfoSubmit}>
         <p>Sign-in</p>
         <Input

@@ -9,14 +9,17 @@ import {
 
 import { memo } from "react"
 import AppointmentsTable from "../AppointmentsTable"
+import { getTimeZone } from "@/app/utils/utils"
 
 type Props = {
+  userType: string,
   userId: number
 }
 
-const SlotDisplay = ({ userId }: Props) => {
+const SlotDisplay = ({ userType, userId }: Props) => {
+  const timeZone = getTimeZone()
 
-  const listResult = useUpcomingSlots(userId, '/api/coach/[id]')
+  const listResult = useUpcomingSlots(timeZone, userId, `/api/${userType}/[id]`)
 
 
   return (
@@ -26,7 +29,7 @@ const SlotDisplay = ({ userId }: Props) => {
         <TabsTrigger value="booked">Booked</TabsTrigger>
       </TabsList>
       <TabsContent value="upcoming">
-        <AppointmentsTable list={listResult} />
+        <AppointmentsTable timeZone={timeZone} list={listResult} />
       </TabsContent>
       <TabsContent value="booked">
         {'coming soon'}

@@ -51,7 +51,15 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
   try {
     const result = await client.sql`
-      SELECT * FROM slots WHERE coach_id = ${userId};
+    SELECT
+    id,
+    coach_id,
+    start_time AT TIME ZONE 'UTC' AT TIME ZONE 'America/New_York' AS start_time,
+    end_time AT TIME ZONE 'UTC' AT TIME ZONE 'America/New_York' AS end_time,
+    is_booked,
+    created_at
+  FROM slots
+  WHERE coach_id = ${userId};
     `;
     return NextResponse.json(result.rows, { status: 200 });
   } catch (error) {

@@ -1,18 +1,20 @@
 "use client"
 
-import UserCalendar from "@/app/components/calendar/Calendar";
-import { DateTimeProvider } from "@/app/components/contexts/DateAndTimeContext";
+import SlotDisplay from "@/app/components/slotDisplay/SlotDisplay";
+import { getUserTypeAndUserId } from "@/app/utils/utils";
+import { usePathname } from "next/navigation";
+
 
 
 const StudentPage = () => {
+  const pathname = usePathname().split('/')
+  const { userType, userId } = getUserTypeAndUserId(pathname)
 
 
   return (
     <div>
-      <DateTimeProvider>
-        <h1>Student Page</h1>
-        <UserCalendar />
-      </DateTimeProvider>
+      <h1>Student Page</h1>
+      <SlotDisplay userType={userType} userId={userId} />
     </div>
   );
 };
