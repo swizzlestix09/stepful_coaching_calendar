@@ -5,9 +5,13 @@ const client = await db.connect();
 async function seed() {
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
-  await client.sql`ALTER TABLE coaches DROP CONSTRAINT coaches_user_id_fkey;`;
-  await client.sql`ALTER TABLE students DROP CONSTRAINT students_user_id_fkey;`;
+  // Drop constraints first if they exist
+  await client.sql`ALTER TABLE IF EXISTS coaches DROP CONSTRAINT IF EXISTS coaches_user_id_fkey;`;
+  await client.sql`ALTER TABLE IF EXISTS students DROP CONSTRAINT IF EXISTS students_user_id_fkey;`;
 
+  // Drop tables in the correct order
+  await client.sql`DROP TABLE IF EXISTS notes CASCADE;`;
+  await client.sql`DROP TABLE IF EXISTS bookings CASCADE;`;
   await client.sql`DROP TABLE IF EXISTS slots CASCADE;`;
   await client.sql`DROP TABLE IF EXISTS coaches CASCADE;`;
   await client.sql`DROP TABLE IF EXISTS students CASCADE;`;
@@ -58,6 +62,16 @@ CREATE TABLE bookings (
   UNIQUE (slot_id)
   );
   `;
+
+  await client.sql`
+CREATE TABLE notes (
+    id SERIAL PRIMARY KEY,
+    booking_id INT REFERENCES bookings(id) ON DELETE CASCADE,
+    satisfaction_score INT CHECK (satisfaction_score BETWEEN 1 AND 5),
+    notes TEXT,
+    call_time TIMESTAMP DEFAULT NOW()
+);
+`;
 
   await client.sql`
     INSERT INTO users (name, email, telephone, password)
