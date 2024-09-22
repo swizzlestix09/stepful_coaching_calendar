@@ -29,7 +29,7 @@ const SlotDisplay = ({ userType, userId }: Props) => {
         <TabsTrigger value="booked">Booked</TabsTrigger>
       </TabsList>
       <TabsContent value="upcoming">
-        <AppointmentsTable timeZone={timeZone} list={listResult} />
+        <AppointmentsTable list={listResult} />
       </TabsContent>
       <TabsContent value="booked">
         {'coming soon'}

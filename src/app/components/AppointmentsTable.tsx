@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { memo } from "react"
+import { formatTitle } from "../utils/utils";
 
 type SlotItem = {
   id: number;
@@ -16,29 +17,38 @@ type SlotItem = {
   start_time: Date,
   end_time: Date,
   is_booked: boolean,
-  created_at: Date
+  created_at: Date,
+  coach_name?: string
 }
 
 type Props = {
   list: SlotItem[];
-  timeZone: string,
+
 }
 
-const AppointmentsTable = ({ timeZone, list }: Props) => {
+const excludedKeys = ['id', 'coach_id']
+const dateString = 'Date'
+
+const AppointmentsTable = ({ list }: Props) => {
+  if (list.length === 0) return null
+  const listKeys = Object.keys(list[0]).filter((key) => !excludedKeys.includes(key))
+
+  console.log(listKeys)
+
   return (
     <Table className="pt-8">
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Date</TableHead>
-          <TableHead>Start Time</TableHead>
-          <TableHead>End Time</TableHead>
-          <TableHead>Booked</TableHead>
-          <TableHead >Created</TableHead>
+          <TableHead>{dateString}</TableHead>
+          {listKeys.map((title) => (
+            <TableHead>{formatTitle(title)}</TableHead>
+          ))}
+
         </TableRow>
       </TableHeader>
       <TableBody>
         {list.map((listItem) => {
-          const { start_time, end_time, created_at, is_booked } = listItem;
+          const { start_time, end_time, created_at, is_booked, coach_name } = listItem;
           const date = new Date(start_time)
           console.log(date)
           const appointmentDate = date.toLocaleDateString()
@@ -48,6 +58,7 @@ const AppointmentsTable = ({ timeZone, list }: Props) => {
           return (
             <TableRow key={listItem.id}>
               <TableCell className="font-medium">{appointmentDate}</TableCell>
+              {coach_name && <TableCell>{coach_name}</TableCell>}
               <TableCell>{startTime}</TableCell>
               <TableCell>{endTime}</TableCell>
               <TableCell>{is_booked ? 'yes' : 'no'}</TableCell>

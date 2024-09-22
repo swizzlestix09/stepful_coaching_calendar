@@ -43,3 +43,10 @@ export const getUserTypeAndUserId = (pathname: string[]) => {
 }
 
 export const getTimeZone = () => (Intl.DateTimeFormat().resolvedOptions().timeZone)
+
+export const formatTitle = (title: string) => {
+  return title
+    .split('_') // Split by underscore
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ')
+};

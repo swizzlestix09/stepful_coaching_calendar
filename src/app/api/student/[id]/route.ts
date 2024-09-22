@@ -23,7 +23,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
   s.is_booked,
   s.created_at
 FROM slots s
-JOIN users u ON s.coach_id = u.id;
+JOIN users u ON s.coach_id = u.id
+ORDER BY s.start_time DESC;
     `;
 
     return NextResponse.json(result.rows, { status: 200 });
