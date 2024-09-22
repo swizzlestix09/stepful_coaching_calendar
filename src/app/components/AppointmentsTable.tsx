@@ -1,15 +1,16 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { memo } from "react"
+import { memo, MouseEvent } from "react"
 import { formatTitle } from "../utils/utils";
+import { useUserContext } from "./contexts/UserContext";
+import { Button } from "@/components/ui/button"
 
 type SlotItem = {
   id: number;
@@ -26,14 +27,38 @@ type Props = {
 
 }
 
+const buttonLabel = 'Book'
+
 const excludedKeys = ['id', 'coach_id']
 const dateString = 'Date'
 
 const AppointmentsTable = ({ list }: Props) => {
+  const { userType, userId } = useUserContext();
+
   if (list.length === 0) return null
   const listKeys = Object.keys(list[0]).filter((key) => !excludedKeys.includes(key))
 
-  console.log(listKeys)
+  const handleAppointmentClick = async (event: MouseEvent<HTMLButtonElement>) => {
+    const id = event.currentTarget.value;
+    if (userType === 'student') {
+      try {
+        const res = await fetch('api/student/[id]', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            userId,
+            id,
+          })
+        })
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    //for coach - to delete probably just need slot id
+  }
 
   return (
     <Table className="pt-8">
@@ -48,7 +73,7 @@ const AppointmentsTable = ({ list }: Props) => {
       </TableHeader>
       <TableBody>
         {list.map((listItem) => {
-          const { start_time, end_time, created_at, is_booked, coach_name } = listItem;
+          const { start_time, end_time, created_at, is_booked, coach_name, id } = listItem;
           const date = new Date(start_time)
           console.log(date)
           const appointmentDate = date.toLocaleDateString()
@@ -63,6 +88,8 @@ const AppointmentsTable = ({ list }: Props) => {
               <TableCell>{endTime}</TableCell>
               <TableCell>{is_booked ? 'yes' : 'no'}</TableCell>
               <TableCell>{creation}</TableCell>
+              {userType === 'student' && <TableCell>
+                <Button value={id} onClick={handleAppointmentClick}>{buttonLabel}</Button></TableCell>}
             </TableRow>
           )
         })}

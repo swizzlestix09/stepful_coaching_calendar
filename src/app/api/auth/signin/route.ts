@@ -9,7 +9,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const body = await req.json();
     const { email, password } = body;
-    //console.log("in try: ", email, password);
+
     const client = await db.connect();
 
     const userResult: QueryResult<QueryResultRow> = await client.sql`

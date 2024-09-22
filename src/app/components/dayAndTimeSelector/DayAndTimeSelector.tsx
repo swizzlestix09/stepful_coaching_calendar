@@ -7,7 +7,7 @@ import { memo, useEffect, useMemo, useState } from "react"
 import { useUserContext } from "../contexts/UserContext"
 
 const DayAndTimeSelector = () => {
-  const { userType, userId } = useUserContext();
+  const { userId } = useUserContext();
   const [successOrErrorMessage, setSuccessOrErrorMessage] = useState<string>('')
   const { dateAndTime } = useDateTime();
   const formattedDate = dateAndTime.date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });

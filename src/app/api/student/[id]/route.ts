@@ -3,7 +3,7 @@ import { db } from "@vercel/postgres";
 
 const client = await db.connect();
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const userId = searchParams.get("userId");
   const timezone = searchParams.get("timezone");
@@ -34,5 +34,22 @@ ORDER BY s.start_time DESC;
       { error: "Failed to fetch slots" },
       { status: 500 }
     );
+  }
+}
+
+export async function POST(req: NextRequest, res: NextResponse) {
+  if (req.method !== "POST") {
+    return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+  }
+
+  try {
+
+  } catch (error) {
+    console.error("Error in appointment saving route:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
   }
 }
