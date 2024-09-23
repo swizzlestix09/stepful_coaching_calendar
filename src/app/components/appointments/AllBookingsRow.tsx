@@ -17,7 +17,7 @@ type Props = {
 const AllBookingsRow = ({ listItem }: Props) => {
 
   const { booking_id, student_name, start_time, end_time, student_telephone, coach_telephone } = listItem;
-  if (!start_time) { }
+  if (!start_time) return null;
   const startDate = new Date(start_time)
   const endDate = new Date(end_time)
   const onlyStartDate = startDate.toLocaleDateString()

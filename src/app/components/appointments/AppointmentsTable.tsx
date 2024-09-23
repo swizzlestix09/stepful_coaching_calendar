@@ -17,26 +17,29 @@ import AllBookingsRow from "./AllBookingsRow";
 export type AppointmentItem = {
   id: number,
   coach_id: number,
-  start_time: Date,
+  coach_name: string
+  created_at: Date,
   end_time: Date,
   is_booked: boolean,
-  created_at: Date,
-  coach_name?: string
+  start_time: Date,
 }
 
-export type BookingItem = AppointmentItem & {
+export type BookingItem = {
   booking_id: number,
   booking_time: Date,
-  coach_telephone: string,
+  coach_telephone?: string,
   slot_id: number,
-  student_name: string,
-  student_id: number
-  student_telephone: string
+  student_name?: string,
+  student_id?: number
+  student_telephone?: string
+  end_time: Date,
+  is_booked: boolean,
+  start_time: Date,
 }
 
 type Props = {
-  list: AppointmentItem[];
   bookedAppointments?: boolean;
+  list: AppointmentItem[] | BookingItem[];
 }
 
 const excludedKeys = ['id', 'coach_id', 'booking_id', 'slot_id', 'student_id', 'booking_time']
@@ -44,15 +47,16 @@ const dateString = 'Date'
 
 const AppointmentsTable = ({ bookedAppointments, list }: Props) => {
   const { userType } = useUserContext();
-  const AppointmentComponent = bookedAppointments ? AllBookingsRow : AllAppointmentsRow
 
   if (!list || list.length === 0) {
     return <div>Nothing to show yet</div>;
   }
 
+
+
   const listKeys = Object.keys(list[0]).filter((key) => !excludedKeys.includes(key))
 
-
+  console.log(list)
   return (
     <Table className="pt-8">
       <TableHeader>
@@ -64,9 +68,19 @@ const AppointmentsTable = ({ bookedAppointments, list }: Props) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {list.map((listItem) => (
-          <AppointmentComponent key={listItem.id} listItem={listItem} userType={userType} />
-        ))}
+        {list.map((listItem) => {
+          if (bookedAppointments) {
+            const bookingItem = listItem as BookingItem; // Assert the type
+            return (
+              <AllBookingsRow key={bookingItem.booking_id} listItem={bookingItem} />
+            );
+          } else {
+            const appointmentItem = listItem as AppointmentItem; // Assert the type
+            return (
+              <AllAppointmentsRow key={appointmentItem.id} listItem={appointmentItem} userType={userType} />
+            );
+          }
+        })}
       </TableBody>
       <TableFooter>
         <TableRow className="w-100">

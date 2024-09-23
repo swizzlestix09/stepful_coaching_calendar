@@ -52,7 +52,8 @@ export const formatTitle = (title: string) => {
     .join(' ')
 };
 
-export function formatUSTelephone(number: string): string {
+export function formatUSTelephone(number?: string): string {
+  if (!number) return 'No number stored. Contact system administrator'
   const cleaned = number.replace(/\D/g, '');
 
   if (cleaned.length !== 10) {
