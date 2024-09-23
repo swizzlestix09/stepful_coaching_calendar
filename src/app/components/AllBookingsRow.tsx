@@ -2,38 +2,39 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { AppointmentItem } from "./AppointmentsTable"
-import { memo, MouseEvent } from "react"
-import { useUserContext } from "./contexts/UserContext"
 
-const buttonLabel = 'Book'
+import { BookingItem } from "./AppointmentsTable"
+import { memo } from "react"
+
+
 
 
 type Props = {
-  listItem: AppointmentItem,
-  userType: string,
+  listItem: BookingItem,
 }
 
-const AllBookingsRow = ({ listItem, userType, }: Props) => {
-  const { start_time, end_time, created_at, is_booked, coach_name, id } = listItem;
-  const date = new Date(start_time)
-  const appointmentDate = date.toLocaleDateString()
-  const startTime = date.toLocaleTimeString()
-  const endTime = new Date(end_time).toLocaleTimeString()
-  const creation = new Date(created_at).toLocaleString()
+const AllBookingsRow = ({ listItem }: Props) => {
+  console.log('in booking: ', listItem)
+
+  const { booking_id, student_name, start_time, end_time, student_telephone, coach_telephone } = listItem;
+  if (!start_time) { }
+  const startDate = new Date(start_time)
+  const endDate = new Date(end_time)
+  const onlyStartDate = startDate.toLocaleDateString()
+  const onlyStartTime = startDate.toLocaleTimeString()
+  const onlyEndTime = endDate.toLocaleTimeString()
+
 
 
 
 
   return (
-    <TableRow key={listItem.id}>
-      <TableCell className="font-medium">{appointmentDate}</TableCell>
-      {coach_name && <TableCell>{coach_name}</TableCell>}
-      <TableCell>{startTime}</TableCell>
-      <TableCell>{endTime}</TableCell>
-      <TableCell>{is_booked ? 'yes' : 'no'}</TableCell>
-      <TableCell>{creation}</TableCell>
+    <TableRow key={booking_id}>
+      <TableCell className="font-medium">{onlyStartDate}</TableCell>
+      <TableCell className="font-medium">{onlyStartTime}</TableCell>
+      <TableCell className="font-medium">{onlyEndTime}</TableCell>
+      <TableCell>{coach_telephone ?? student_telephone}</TableCell>
+      <TableCell>{student_name}</TableCell>
     </TableRow>
   )
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 export const useBookedSlots = (url: string, userId?: number) => {
-  if (!userId) return null;
+  if (!userId) return [];
   const [slots, setSlots] = useState([])
 
   useEffect(() => {

@@ -38,7 +38,7 @@ const SlotDisplay = () => {
         <AppointmentsTable list={allAppointmentsList} />
       </TabsContent>
       <TabsContent value="booked">
-        <AppointmentsTable list={allBookedList} />
+        <AppointmentsTable bookedAppointments={true} list={allBookedList} />
       </TabsContent>
     </Tabs>
   )

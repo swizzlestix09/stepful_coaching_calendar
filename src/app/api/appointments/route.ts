@@ -58,8 +58,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
       b.booking_time,
       s.start_time,
       s.end_time,
-      u_coach.telephone AS coach_telephone,
-      u_student.telephone AS student_telephone
+      u_student.telephone AS student_telephone,
+      u_student.name AS student_name
     FROM
       bookings b
     JOIN

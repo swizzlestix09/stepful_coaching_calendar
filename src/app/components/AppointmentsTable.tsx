@@ -12,6 +12,7 @@ import { formatTitle } from "../utils/utils";
 import { useUserContext } from "./contexts/UserContext";
 
 import AllAppointmentsRow from "./AllAppointmentsRow";
+import AllBookingsRow from "./AllBookingsRow";
 
 export type AppointmentItem = {
   id: number,
@@ -23,35 +24,29 @@ export type AppointmentItem = {
   coach_name?: string
 }
 
-export type BookingItem = {
+export type BookingItem = AppointmentItem & {
   booking_id: number,
   booking_time: Date,
   coach_telephone: string,
-  end_time: Date,
   slot_id: number,
-  start_time: Date,
+  student_name: string,
   student_id: number
+  student_telephone: string
 }
 
 type Props = {
   list: AppointmentItem[];
-
+  bookedAppointments?: boolean;
 }
 
-
-const excludedKeys = ['id', 'coach_id', 'booking_id', 'slot_id']
+const excludedKeys = ['id', 'coach_id', 'booking_id', 'slot_id', 'student_id', 'booking_time']
 const dateString = 'Date'
 
-
-const AppointmentsTable = ({ list }: Props) => {
-
+const AppointmentsTable = ({ bookedAppointments, list }: Props) => {
   const { userType } = useUserContext();
-
+  const AppointmentComponent = bookedAppointments ? AllBookingsRow : AllAppointmentsRow
   if (list.length === 0) return null
-  const listKeys = Object.keys(list[0]).filter((key) => !excludedKeys.includes(key))
-
-
-
+  let listKeys = Object.keys(list[0]).filter((key) => !excludedKeys.includes(key))
 
 
   return (
@@ -66,7 +61,7 @@ const AppointmentsTable = ({ list }: Props) => {
       </TableHeader>
       <TableBody>
         {list.map((listItem) => (
-          <AllAppointmentsRow listItem={listItem} userType={userType} />
+          <AppointmentComponent listItem={listItem} userType={userType} />
         ))}
       </TableBody>
       <TableFooter>

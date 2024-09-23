@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 export const useUpcomingSlots = (timezone: string, url: string, userId?: number) => {
-  if (!userId) return null;
+  if (!userId) return [];
 
   const [slots, setSlots] = useState([])
 
