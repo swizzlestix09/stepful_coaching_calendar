@@ -18,6 +18,7 @@ export const createBeginningAndEndTimesForSlot = ({ date, time }: DateAndTimeTyp
 
 
 export const convert24hrTimeto12hrTime = (time: string) => {
+  /* eslint-disable prefer-const */
   let [h, m] = time.split(':').map(Number);
 
   let meridiem = 'AM'
