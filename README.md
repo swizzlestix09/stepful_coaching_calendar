@@ -1,5 +1,7 @@
 # Stepful Calendar
 
+### Initial Ideas/ thought process: 
+[excalidraw](https://excalidraw.com/#room=82cf6d76efc2e54a844a,oY8ulLmWVDz7kK3hYkJz8A)
 ### Criteria:
 - Your website should satisfy the following user stories:
 - Coaches can add slots of availability to their calendars. These slots are always 2 hours long and each slot can be booked by exactly 1 student.
