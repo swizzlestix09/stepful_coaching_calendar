@@ -28,7 +28,7 @@ const AllAppointmentsRow = ({ listItem, userType }: Props) => {
 
     if (userType === 'student') {
       try {
-        const res = await fetch(`/api/student/${userId}`, {
+        await fetch(`/api/student/${userId}`, {
           method: 'POST',
           headers: {
             'Content-type': 'application/json'

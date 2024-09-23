@@ -3,7 +3,7 @@ import { db } from "@vercel/postgres";
 
 const client = await db.connect();
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest) {
   if (req.method !== "GET") {
     return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
   }

@@ -1,5 +1,4 @@
 import { useUpcomingSlots } from "@/app/hooks/useUpcomingSlots"
-import { Button } from "@/components/ui/button"
 import {
   Tabs,
   TabsContent,
@@ -16,17 +15,15 @@ import { useBookedSlots } from "@/app/hooks/useBookedSlots"
 
 
 const SlotDisplay = () => {
-
   const { userType, userId, timezone } = useUserContext();
+  const urlParam = userType ? `/api/${userType}/[id]` : null;
 
-
-  const allAppointmentsList = useUpcomingSlots(timezone, `/api/${userType}/[id]`, userId)
-
+  const allAppointmentsList = useUpcomingSlots(timezone, urlParam, userId)
   const allBookedList = useBookedSlots('/api/appointments', userId)
 
-  console.log(`${userType}: `, allAppointmentsList, allBookedList)
-
-  if (!allAppointmentsList || !allBookedList) return null;
+  if (!userType || !timezone || !userId || !allAppointmentsList || !allBookedList) {
+    return null;
+  }
 
   return (
     <Tabs defaultValue="upcoming" >
@@ -45,20 +42,3 @@ const SlotDisplay = () => {
 }
 
 export default memo(SlotDisplay)
-
-
-
-//coach
-//using userId, fetch all slots.
-//once slots are recieved, should be viewable in Upcoming
-//booked ones can be rendered once student can book
-
-
-//both show upcoming and booked appts
-//students should have ability to book upcoming appt
-//booked slots should show phone numbers
-
-//show all bookings with coach id and fetch the students telephone number
-//show all slots for coach
-
-//nice to have - delete bookings ( coach ) and pagination

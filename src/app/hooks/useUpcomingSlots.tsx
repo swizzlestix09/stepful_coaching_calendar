@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const useUpcomingSlots = (timezone: string, url: string, userId?: number) => {
-  if (!userId) return [];
-
+export const useUpcomingSlots = (timezone: string, url: string | null, userId?: number) => {
   const [slots, setSlots] = useState([])
 
   useEffect(() => {
@@ -10,7 +8,7 @@ export const useUpcomingSlots = (timezone: string, url: string, userId?: number)
       try {
         const res = await fetch(`${url}?userId=${userId}&timezone=${timezone}`)
         const data = await res.json()
-        console.log(data)
+
         setSlots(data)
       } catch {
         console.error('error with fetch')
@@ -21,7 +19,7 @@ export const useUpcomingSlots = (timezone: string, url: string, userId?: number)
     const intervalId = setInterval(fetchSlots, 30000);
     return () => clearInterval(intervalId);
 
-  }, [])
+  }, [timezone, url, userId])
 
   return slots
 }

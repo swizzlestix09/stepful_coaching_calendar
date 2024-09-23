@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { db, QueryResult, QueryResultRow } from "@vercel/postgres";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
   }

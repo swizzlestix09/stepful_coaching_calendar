@@ -61,7 +61,7 @@ const DayAndTimeSelector = () => {
   const twelveHourTime = useMemo(() => {
     const { time } = dateAndTime;
     return convert24hrTimeto12hrTime(time)
-  }, [dateAndTime.time])
+  }, [dateAndTime])
 
   return (
     <div className="flex flex-col items-center">

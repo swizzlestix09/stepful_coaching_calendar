@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { memo, MouseEvent } from "react"
+import { memo } from "react"
 import { formatTitle } from "../../utils/utils";
 import { useUserContext } from "../contexts/UserContext";
 
@@ -46,7 +46,7 @@ const AppointmentsTable = ({ bookedAppointments, list }: Props) => {
   const { userType } = useUserContext();
   const AppointmentComponent = bookedAppointments ? AllBookingsRow : AllAppointmentsRow
   if (list.length === 0) return null
-  let listKeys = Object.keys(list[0]).filter((key) => !excludedKeys.includes(key))
+  const listKeys = Object.keys(list[0]).filter((key) => !excludedKeys.includes(key))
 
 
   return (
@@ -55,13 +55,13 @@ const AppointmentsTable = ({ bookedAppointments, list }: Props) => {
         <TableRow>
           <TableHead>{dateString}</TableHead>
           {listKeys.map((title) => (
-            <TableHead>{formatTitle(title)}</TableHead>
+            <TableHead key={title}>{formatTitle(title)}</TableHead>
           ))}
         </TableRow>
       </TableHeader>
       <TableBody>
         {list.map((listItem) => (
-          <AppointmentComponent listItem={listItem} userType={userType} />
+          <AppointmentComponent key={listItem.id} listItem={listItem} userType={userType} />
         ))}
       </TableBody>
       <TableFooter>

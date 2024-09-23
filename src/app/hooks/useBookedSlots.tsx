@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react"
 
 export const useBookedSlots = (url: string, userId?: number) => {
-  if (!userId) return [];
   const [bookedSlots, setBookedSlots] = useState([])
-
 
   useEffect(() => {
     const fetchBookedSlots = async () => {
@@ -11,7 +9,7 @@ export const useBookedSlots = (url: string, userId?: number) => {
 
         const res = await fetch(`${url}?userId=${userId}`)
         const data = await res.json()
-        console.log(data)
+
         setBookedSlots(data)
       } catch {
         console.error('error with fetch')
@@ -20,7 +18,7 @@ export const useBookedSlots = (url: string, userId?: number) => {
     fetchBookedSlots()
     const intervalId = setInterval(fetchBookedSlots, 30000);
     return () => clearInterval(intervalId);
-  }, [])
+  }, [url, userId])
 
 
 

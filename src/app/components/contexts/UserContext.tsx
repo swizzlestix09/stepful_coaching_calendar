@@ -26,7 +26,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const { userType, userId } = getUserTypeAndUserId(pathname)
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     setUserData({ userType, userId, timezone });
-  }, [])
+  }, [pathname])
 
 
   return (
