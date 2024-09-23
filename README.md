@@ -19,27 +19,27 @@ I’m using Next.js which has multiple types of querying, enabling the creation 
 ### Front End
 There will be a few components that should be implemented for V1:
 Sign in will be quick and without authentication since that was not on the table for V1
-Day and Time Selector:
-Coach feature only
-Calendar
-Able to select dates, no previous dates only present and future.
-Time
-Able to select times, no previous times, and if selected will not store.
-Appointments:
-Coaches:
-Coaches’ upcoming slots
-Booked slots w/ student telephone
-Students:
-All coaches upcoming slots - able to book time
-Booked slots w/ teacher telephone
-Notes and Ratings:
-Coach feature only
-Coach can write note on past calls with students
-Coach can store ratings with students
-Coach Should be able to view all past notes
-Contexts:
-User context - since user data is being used in multiple places to fetch data, user data given by the path will be stored in a context
-Date/Time - date and time is also used in multiple places, so we will store those in a context as well
+ -Day and Time Selector:
+  -Coach feature only
+ -Calendar
+  -Able to select dates, no previous dates only present and future.
+  -Time
+  -Able to select times, no previous times, and if selected will not store.
+ -Appointments:
+  -Coaches:
+  -Coaches’ upcoming slots
+ -Booked slots w/ student telephone
+ -Students:
+  -All coaches upcoming slots - able to book time
+  -Booked slots w/ teacher telephone
+ -Notes and Ratings:
+  -Coach feature only
+  -Coach can write note on past calls with students
+  -Coach can store ratings with students
+  -Coach Should be able to view all past notes
+ -Contexts:
+  -User context - since user data is being used in multiple places to fetch data, user data given by the path will be stored in a context
+  -Date/Time - date and time is also used in multiple places, so we will store those in a context as well
 
 ### Back End
 ![dbtables](https://github.com/user-attachments/assets/9b22dfde-d9a5-437c-9125-e74cf2243335)
