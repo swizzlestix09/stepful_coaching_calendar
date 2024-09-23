@@ -91,10 +91,10 @@ These are the log in credentials:
 
 Now that I have submitted the product, there are a few oversights that I took that I regret and will probably fix before implementing any V2 features such as:
 
--Have a loading state for both bookings and appointments
--Have a state for when there are no bookings appointments
--Pagination for appointments
--Not rely on useTimeouts to update bookings/appointments
--Implement Notes/Ratings
+- Have a loading state for both bookings and appointments
+- Have a state for when there are no bookings appointments
+- Pagination for appointments
+- Not rely on useTimeouts to update bookings/appointments
+- Implement Notes/Ratings
 
 I appreciate your time, thank you for your review. :raised_hands:
