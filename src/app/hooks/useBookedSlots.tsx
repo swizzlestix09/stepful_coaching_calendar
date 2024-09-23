@@ -2,26 +2,28 @@ import { useState, useEffect } from "react"
 
 export const useBookedSlots = (url: string, userId?: number) => {
   if (!userId) return [];
-  const [slots, setSlots] = useState([])
+  const [bookedSlots, setBookedSlots] = useState([])
+
 
   useEffect(() => {
-    const fetchSlots = async () => {
+    const fetchBookedSlots = async () => {
       try {
 
         const res = await fetch(`${url}?userId=${userId}`)
         const data = await res.json()
         console.log(data)
-        setSlots(data)
+        setBookedSlots(data)
       } catch {
         console.error('error with fetch')
       }
     }
-    fetchSlots()
-
-    const intervalId = setInterval(fetchSlots, 30000);
+    fetchBookedSlots()
+    const intervalId = setInterval(fetchBookedSlots, 30000);
     return () => clearInterval(intervalId);
-
   }, [])
 
-  return slots
+
+
+
+  return bookedSlots
 }
