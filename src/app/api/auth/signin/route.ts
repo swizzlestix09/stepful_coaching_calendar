@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     const userResult: QueryResult<QueryResultRow> = await client.sql`
     SELECT * FROM users WHERE email = ${email} AND password = ${password};
     `;
-    console.log();
+
     if (userResult.rowCount === 0) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }

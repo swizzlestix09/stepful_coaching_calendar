@@ -28,9 +28,7 @@ export async function POST(req: NextRequest) {
     DO NOTHING
     RETURNING *;`;
 
-    console.log("Slot Result: ", slotResult.rowCount);
     if (slotResult.rowCount === 0) {
-      console.log("triggered?");
       return NextResponse.json(
         { message: "Slot already saved" },
         { status: 500 }

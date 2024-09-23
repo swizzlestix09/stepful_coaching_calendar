@@ -20,8 +20,5 @@ export const useBookedSlots = (url: string, userId?: number) => {
     return () => clearInterval(intervalId);
   }, [url, userId])
 
-
-
-
   return bookedSlots
 }

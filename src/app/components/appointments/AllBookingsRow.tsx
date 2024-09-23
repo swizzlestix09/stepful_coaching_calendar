@@ -15,7 +15,6 @@ type Props = {
 }
 
 const AllBookingsRow = ({ listItem }: Props) => {
-  console.log('in booking: ', listItem)
 
   const { booking_id, student_name, start_time, end_time, student_telephone, coach_telephone } = listItem;
   if (!start_time) { }

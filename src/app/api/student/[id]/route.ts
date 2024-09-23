@@ -60,7 +60,6 @@ export async function POST(req: NextRequest) {
 
     await client.sql`COMMIT;`;
 
-    console.log("Slot booked successfully");
     return NextResponse.json({ error: "Sucessfully Saved" }, { status: 201 });
   } catch (error) {
     console.error("Error in appointment saving route:", error);
