@@ -16,10 +16,10 @@ import { useBookedSlots } from "@/app/hooks/useBookedSlots"
 
 const SlotDisplay = () => {
   const { userType, userId, timezone } = useUserContext();
-  const urlParam = userType ? `/api/${userType}/[id]` : null;
-
-  const allAppointmentsList = useUpcomingSlots(timezone, urlParam, userId)
-  const allBookedList = useBookedSlots('/api/appointments', userId)
+  const upcomingUrlParam = userType ? `/api/${userType}/[id]` : null;
+  const bookingUrlParam = userId ? '/api/appointments' : null
+  const allAppointmentsList = useUpcomingSlots(timezone, upcomingUrlParam, userId)
+  const allBookedList = useBookedSlots(bookingUrlParam, userId)
 
   if (!userType || !timezone || !userId || !allAppointmentsList || !allBookedList) {
     return null;

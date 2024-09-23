@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-export const useBookedSlots = (url: string, userId?: number) => {
+export const useBookedSlots = (url: string | null, userId?: number) => {
   const [bookedSlots, setBookedSlots] = useState([])
 
   useEffect(() => {

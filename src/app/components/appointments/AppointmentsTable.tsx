@@ -45,7 +45,11 @@ const dateString = 'Date'
 const AppointmentsTable = ({ bookedAppointments, list }: Props) => {
   const { userType } = useUserContext();
   const AppointmentComponent = bookedAppointments ? AllBookingsRow : AllAppointmentsRow
-  if (list.length === 0) return null
+
+  if (!list || list.length === 0) {
+    return <div>Nothing to show yet</div>;
+  }
+
   const listKeys = Object.keys(list[0]).filter((key) => !excludedKeys.includes(key))
 
 

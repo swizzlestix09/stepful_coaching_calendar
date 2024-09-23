@@ -22,7 +22,7 @@ async function seed() {
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE,
-    telephone VARCHAR(20) NOT NULL,
+    telephone VARCHAR(10) NOT NULL,
     password VARCHAR(12) NOT NULL
   );
   `;
@@ -77,8 +77,8 @@ CREATE TABLE notes (
     INSERT INTO users (name, email, telephone, password)
    VALUES (${"John Doe"}, ${"john.doe@example.com"}, ${"2122222898"}, ${"password123"}),
      (${"Annie Ann"}, ${"annie.ann@example.com"}, ${"6461113232"}, ${"password123"}),
-    (${"Will Willam"}, ${"will.willam@example.com"}, ${"9098767777"}, ${"password123"}),
-    (${"Simp Simperton"}, ${"simp.simperton@example.com"}, ${"098234172634"}, ${"password123"});
+    (${"Will Willam"}, ${"will.willam@example.com"}, ${"909876777"}, ${"password123"}),
+    (${"Simp Simperton"}, ${"simp.simperton@example.com"}, ${"0982341726"}, ${"password123"});
   `;
 
   await client.sql`
