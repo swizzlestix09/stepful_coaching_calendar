@@ -1,20 +1,22 @@
 ### Stepful Calendar
 
 Criteria:
-Your website should satisfy the following user stories:
-Coaches can add slots of availability to their calendars. These slots are always 2 hours long and each slot can be booked by exactly 1 student.
-Coaches can view their own upcoming slots.
-Students can book upcoming, available slots for any coach.
-When a slot is booked, both the student and coach can view each other’s phone-number.
-After they complete a call with a student, coaches will record the student’s satisfaction (an integer 1-5) and write some free-form notes.
-Coaches should be able to review their past scores and notes for all of their calls.
+- Your website should satisfy the following user stories:
+- Coaches can add slots of availability to their calendars. These slots are always 2 hours long and each slot can be booked by exactly 1 student.
+- Coaches can view their own upcoming slots.
+- Students can book upcoming, available slots for any coach.
+- When a slot is booked, both the student and coach can view each other’s phone-number.
+- After they complete a call with a student, coaches will record the student’s satisfaction (an integer 1-5) and write some free-form notes.
+- Coaches should be able to review their past scores and notes for all of their calls.
 
 ## Architecture
+![stepfulMVCdiagram](https://github.com/user-attachments/assets/574692f8-632b-44e6-a8c8-52685bb9c61d)
 
 The architecture for this project is simple.
 I am most familiar with postgres and decided this would be the best choice. Some of the reasons I’d say is because it supports relational and non relational querying, and I think with a growing website like Stepful its scalability and performance would be helpful.
 I’m using Next.js which has multiple types of querying, enabling the creation of a dynamic website where we can use several methods for querying data (SSG, SSR, etc.)
-Front End
+
+### Front End
 There will be a few components that should be implemented for V1:
 Sign in will be quick and without authentication since that was not on the table for V1
 Day and Time Selector:
@@ -39,7 +41,8 @@ Contexts:
 User context - since user data is being used in multiple places to fetch data, user data given by the path will be stored in a context
 Date/Time - date and time is also used in multiple places, so we will store those in a context as well
 
-## Back End
+### Back End
+![dbtables](https://github.com/user-attachments/assets/9b22dfde-d9a5-437c-9125-e74cf2243335)
 
 I created a universal users table, because the information being collected at the moment is generally the same. Everyone will be a user, but there are differences between coaches and students, and who knows if we’ll create a different type of user in the future.
 Though keeping the information in separate tables can slow down performance, stepful’s growth leads me to believe we might add fields for specific users that can be kept separate, so ultimately it might positively impact performance.
