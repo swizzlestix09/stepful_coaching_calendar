@@ -9,17 +9,24 @@ import {
 
 import { memo } from "react"
 import AppointmentsTable from "../AppointmentsTable"
-import { getTimeZone } from "@/app/utils/utils"
+
 import { useUserContext } from "../contexts/UserContext"
+import { useBookedSlots } from "@/app/hooks/useBookedSlots"
 
 
 
 const SlotDisplay = () => {
+
   const { userType, userId, timezone } = useUserContext();
-  if (!userId) return null;
 
-  const listResult = useUpcomingSlots(timezone, userId, `/api/${userType}/[id]`)
 
+  const allAppointmentsList = useUpcomingSlots(timezone, `/api/${userType}/[id]`, userId)
+
+  const allBookedList = useBookedSlots('/api/appointments', userId)
+
+  console.log(`${userType}: `, allAppointmentsList, allBookedList)
+
+  if (!allAppointmentsList || !allBookedList) return null;
 
   return (
     <Tabs defaultValue="upcoming" >
@@ -28,16 +35,17 @@ const SlotDisplay = () => {
         <TabsTrigger value="booked">Booked</TabsTrigger>
       </TabsList>
       <TabsContent value="upcoming">
-        <AppointmentsTable list={listResult} />
+        <AppointmentsTable list={allAppointmentsList} />
       </TabsContent>
       <TabsContent value="booked">
-        {'coming soon'}
+        <AppointmentsTable list={allBookedList} />
       </TabsContent>
     </Tabs>
   )
 }
 
 export default memo(SlotDisplay)
+
 
 
 //coach

@@ -43,13 +43,30 @@ export async function POST(req: NextRequest, res: NextResponse) {
   }
 
   try {
+    const { userId, id } = await req.json();
 
+    await client.sql`BEGIN;`;
+
+    await client.sql`
+      UPDATE slots
+      SET is_booked = TRUE
+      WHERE id = ${id}
+      RETURNING *;`;
+
+    await client.sql`
+      INSERT INTO bookings (slot_id, student_id)
+      VALUES (${id}, ${userId})
+      RETURNING *;`;
+
+    await client.sql`COMMIT;`;
+
+    console.log("Slot booked successfully");
+    return NextResponse.json({ error: "Sucessfully Saved" }, { status: 201 });
   } catch (error) {
     console.error("Error in appointment saving route:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
     );
-  }
   }
 }
