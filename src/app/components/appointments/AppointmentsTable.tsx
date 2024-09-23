@@ -8,8 +8,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { memo, MouseEvent } from "react"
-import { formatTitle } from "../utils/utils";
-import { useUserContext } from "./contexts/UserContext";
+import { formatTitle } from "../../utils/utils";
+import { useUserContext } from "../contexts/UserContext";
 
 import AllAppointmentsRow from "./AllAppointmentsRow";
 import AllBookingsRow from "./AllBookingsRow";

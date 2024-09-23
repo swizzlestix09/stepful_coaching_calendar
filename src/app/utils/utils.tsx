@@ -50,3 +50,15 @@ export const formatTitle = (title: string) => {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(' ')
 };
+
+export function formatUSTelephone(number: string): string {
+  const cleaned = number.replace(/\D/g, '');
+
+  if (cleaned.length !== 10) {
+    throw new Error('Invalid US phone number length');
+  }
+
+  const formattedNumber = `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+
+  return formattedNumber;
+}

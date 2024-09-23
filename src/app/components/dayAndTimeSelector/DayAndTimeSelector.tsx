@@ -13,6 +13,11 @@ const DayAndTimeSelector = () => {
   const formattedDate = dateAndTime.date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
 
   const handleDayandTimeSaveClick = async () => {
+    const currentTime = new Date()
+    if (dateAndTime.date < currentTime) {
+      setSuccessOrErrorMessage("You cannot select a time that has already passed today.");
+      return;
+    }
     const { startTime, endTime } = createBeginningAndEndTimesForSlot(dateAndTime);
 
     try {

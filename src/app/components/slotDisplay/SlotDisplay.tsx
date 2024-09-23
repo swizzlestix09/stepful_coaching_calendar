@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/tabs"
 
 import { memo } from "react"
-import AppointmentsTable from "../AppointmentsTable"
+import AppointmentsTable from "../appointments/AppointmentsTable"
 
 import { useUserContext } from "../contexts/UserContext"
 import { useBookedSlots } from "@/app/hooks/useBookedSlots"

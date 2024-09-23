@@ -5,7 +5,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { AppointmentItem } from "./AppointmentsTable"
 import { memo, MouseEvent } from "react"
-import { useUserContext } from "./contexts/UserContext"
+import { useUserContext } from "../contexts/UserContext"
 
 const buttonLabel = 'Book'
 
@@ -24,10 +24,9 @@ const AllAppointmentsRow = ({ listItem, userType }: Props) => {
   const { userId } = useUserContext();
 
   const handleAppointmentClick = async (event: MouseEvent<HTMLButtonElement>) => {
-    console.log('triggered?')
     const id = event.currentTarget.value;
+
     if (userType === 'student') {
-      console.log('before try')
       try {
         const res = await fetch(`/api/student/${userId}`, {
           method: 'POST',
@@ -53,7 +52,7 @@ const AllAppointmentsRow = ({ listItem, userType }: Props) => {
       <TableCell>{endTime}</TableCell>
       <TableCell>{is_booked ? 'yes' : 'no'}</TableCell>
       <TableCell>{creation}</TableCell>
-      {userType === 'student' && <TableCell>
+      {(userType === 'student' && !is_booked) && <TableCell>
         <Button value={id} onClick={handleAppointmentClick}>{buttonLabel}</Button></TableCell>}
     </TableRow>
   )

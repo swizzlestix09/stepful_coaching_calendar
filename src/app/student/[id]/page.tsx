@@ -6,16 +6,14 @@ import { usePathname } from "next/navigation";
 
 
 
-const StudentPage = () => {
-  const pathname = usePathname().split('/')
-  const { userType, userId } = getUserTypeAndUserId(pathname)
-
-  return (
-    <div>
-      <h1>Student Page</h1>
-      <SlotDisplay userType={userType} userId={userId} />
+const StudentPage = () => (
+  <div>
+    <h1 className="w-100 p-8">Student Page</h1>
+    <div className="w-2/3 p-8 mx-auto">
+      <SlotDisplay />
     </div>
-  );
-};
+  </div>
+);
+
 
 export default StudentPage;

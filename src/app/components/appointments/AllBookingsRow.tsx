@@ -5,6 +5,7 @@ import {
 
 import { BookingItem } from "./AppointmentsTable"
 import { memo } from "react"
+import { formatUSTelephone } from "@/app/utils/utils"
 
 
 
@@ -23,8 +24,7 @@ const AllBookingsRow = ({ listItem }: Props) => {
   const onlyStartDate = startDate.toLocaleDateString()
   const onlyStartTime = startDate.toLocaleTimeString()
   const onlyEndTime = endDate.toLocaleTimeString()
-
-
+  const phoneNumber = coach_telephone ?? student_telephone
 
 
 
@@ -33,7 +33,7 @@ const AllBookingsRow = ({ listItem }: Props) => {
       <TableCell className="font-medium">{onlyStartDate}</TableCell>
       <TableCell className="font-medium">{onlyStartTime}</TableCell>
       <TableCell className="font-medium">{onlyEndTime}</TableCell>
-      <TableCell>{coach_telephone ?? student_telephone}</TableCell>
+      <TableCell>{formatUSTelephone(phoneNumber)}</TableCell>
       <TableCell>{student_name}</TableCell>
     </TableRow>
   )

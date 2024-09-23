@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
   s.start_time AT TIME ZONE 'UTC' AT TIME ZONE ${timezone} AS start_time,
   s.end_time AT TIME ZONE 'UTC' AT TIME ZONE ${timezone} AS end_time,
   s.is_booked,
-  s.created_at
+  s.created_at AT TIME ZONE 'UTC' AT TIME ZONE ${timezone} AS created_at
 FROM slots s
 JOIN users u ON s.coach_id = u.id
 ORDER BY s.start_time DESC;
