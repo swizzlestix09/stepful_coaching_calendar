@@ -1,6 +1,6 @@
-### Stepful Calendar
+# Stepful Calendar
 
-Criteria:
+### Criteria:
 - Your website should satisfy the following user stories:
 - Coaches can add slots of availability to their calendars. These slots are always 2 hours long and each slot can be booked by exactly 1 student.
 - Coaches can view their own upcoming slots.
