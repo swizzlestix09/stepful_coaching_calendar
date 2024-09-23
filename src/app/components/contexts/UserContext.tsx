@@ -26,6 +26,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const { userType, userId } = getUserTypeAndUserId(pathname)
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     setUserData({ userType, userId, timezone });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 

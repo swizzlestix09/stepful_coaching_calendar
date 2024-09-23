@@ -5,11 +5,9 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { StringToBoolean } from "class-variance-authority/types";
 
 type Props = {
   ratingTitle?: string;
