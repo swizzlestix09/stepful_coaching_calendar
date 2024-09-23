@@ -35,8 +35,9 @@ export const convert24hrTimeto12hrTime = (time: string) => {
 }
 
 
-export const getUserTypeAndUserId = (pathname: string[]) => {
-  const [, userType, userId] = pathname;
+export const getUserTypeAndUserId = (pathname: string) => {
+  const pathNameArray = pathname.split('/')
+  const [, userType, userId] = pathNameArray;
 
   return {
     userType, userId: parseInt(userId)

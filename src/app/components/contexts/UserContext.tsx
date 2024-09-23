@@ -20,14 +20,14 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     timezone: ''
   });
 
-  const pathname = usePathname().split('/')
+  const pathname = usePathname()
 
   useEffect(() => {
     const { userType, userId } = getUserTypeAndUserId(pathname)
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     setUserData({ userType, userId, timezone });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [pathname])
 
 
   return (
