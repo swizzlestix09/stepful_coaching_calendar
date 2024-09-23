@@ -1,10 +1,6 @@
 "use client"
 
 import SlotDisplay from "@/app/components/slotDisplay/SlotDisplay";
-import { getUserTypeAndUserId } from "@/app/utils/utils";
-import { usePathname } from "next/navigation";
-
-
 
 const StudentPage = () => (
   <div>

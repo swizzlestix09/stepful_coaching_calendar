@@ -3,6 +3,10 @@ import { Button } from "@/components/ui/button"
 
 const Notes = () => {
 
+  const handleSaveNotesClick = () => {
+
+  }
+
   return (
     <form className=" max-w-lg">
       <label className="pt-1 block text-gray-700 text-sm font-bold mb-2" htmlFor="note">
@@ -12,6 +16,7 @@ const Notes = () => {
       <div className="flex justify-end mt-4">
         <Button
           type="submit"
+          onClick={handleSaveNotesClick}
         >
           Save Notes
         </Button>
