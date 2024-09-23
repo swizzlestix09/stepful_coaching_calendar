@@ -3,15 +3,6 @@ import { db } from "@vercel/postgres";
 
 const client = await db.connect();
 
-// post request for notes & ratings
-// make a key for post
-//current one can be 'slots'
-//this one can be 'notes'
-//if slots, run request below
-//if notes, run request created tomorrow - probably should save ratings at same time
-
-//notes should also render with scores
-
 export async function POST(req: NextRequest) {
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
