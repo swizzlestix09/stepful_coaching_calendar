@@ -12,6 +12,7 @@ import {
 type Props = {
   ratingTitle?: string;
 }
+
 const ratings = [
   { value: '0', label: "Catastrophe! 🚨" },
   { value: '1', label: "Could Use Some Serious Help! 🤦" },
@@ -23,7 +24,6 @@ const ratings = [
 
 const Rating = ({ ratingTitle = "Select a rating" }: Props) => {
   return (
-
     <Select>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder={ratingTitle} />

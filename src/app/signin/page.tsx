@@ -83,29 +83,3 @@ export default function Page() {
 
   )
 }
-
-
-
-/*
- * get information on how to make a function that posts information to the database
- * double checking the user information  if successful we have to check who is a coach and who is a student
- * otherwise they have to be redirected to the homepage (/signin)
- *
- * Once this is complete can move on to calendar
- *  1) allow a coach to create bookings
- *    - pick a day
- *     -how do i enable a coach to pick a day?
- * Create a calendar with shadcn , use state for date
- *   how to select a time? Input?
- *   also what is the format of the time
- *   how to store time in postgrs sql
- *     do not book past (before today) time
- *   once  time + day is selected enable save
- *     is booked in slots needs to be updated
- *      booking needs slot id and student id updated
- *      telephone number of student needs to be referenced to by student_id in booking
- *      telephone number of coach needs to be referenced to by slot_id and then coach_id
- *
- *
- * - 2 hour time slot
- */
